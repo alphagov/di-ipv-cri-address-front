@@ -1,4 +1,4 @@
-FROM node:16.13.1-alpine
+FROM node:18.7.0-alpine
 
 ENV PORT 5010
 
