@@ -24,6 +24,7 @@ module.exports = class PlaywrightDevPage {
   }
 
   isRelyingPartyServer() {
+    console.log(this.page.url());
     return new URL(this.page.url()).origin === "http://example.net";
   }
 
@@ -37,12 +38,22 @@ module.exports = class PlaywrightDevPage {
     );
   }
 
-  hasErrorQueryParams() {
+  hasErrorQueryParams(code = "server_error") {
+    console.log(code);
     const { searchParams } = new URL(this.page.url());
 
+    console.log(searchParams);
+    console.log(searchParams.get("error") == code);
     return (
-      searchParams.get("error") === "server_error" &&
-      searchParams.get("error_description") === "gateway"
+      searchParams.get("error") === code
+      // &&
+      // searchParams.get("error_description") === description
     );
+  }
+
+  isErrorCode(code) {
+    const { searchParams } = new URL(this.page.url());
+
+    return searchParams.get("error") && searchParams.get("error") === code;
   }
 };

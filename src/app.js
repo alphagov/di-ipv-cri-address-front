@@ -103,6 +103,8 @@ router.use(getGTM);
 router.use(setScenarioHeaders);
 router.use(setAxiosDefaults);
 
+router.use(commonExpress.lib.sessionComplete.checkForSessionComplete);
+
 router.use("/oauth2", commonExpress.routes.oauth2);
 
 router.use("/previous", require("./app/address/routes/previous"));
